@@ -1,62 +1,84 @@
 "use client";
 
 import {
+    createMoodoAPI,
+    deleteMoodoAPI,
+    toggleMoodoCompletionAPI,
+} from "@/util/apiUtils";
+
+import {
     createContext,
-    ReactNode,
     useContext,
-    useState,
     useEffect,
+    useState,
 } from "react";
-import dummyMoodos from "./dummyMoodos";
 
 export const moodosContext = createContext(null);
 
 export function MoodosProvider({ children }) {
+    const URL = "http://localhost:5001";
     const [moodos, setMoodos] = useState([]);
 
     useEffect(() => {
-        // Initialize moodos with dummyMoodos when the component mounts
-        setMoodos(dummyMoodos);
-        console.log(moodos);
+        // Fetch the initial Moodos data from your API when the component mounts
+        fetchMoodosData();
     }, []);
 
-    function handleAddMoodo(task, tags) {
-        setMoodos((prev) => {
-            const newMoodos = [
-                {
-                    id: Math.floor(Math.random() * 100) + 1, // Random ID between 1 and 100
-                    task,
-                    tags, // Store tags in the Moodo object
-                    completed: false,
-                    createdAt: new Date(),
-                },
-                ...prev,
-            ];
-            localStorage.setItem("moodos", JSON.stringify(newMoodos));
-            return newMoodos;
-        });
+    async function fetchMoodosData() {
+        try {
+            // Make an API call to fetch the Moodos data
+            const response = await fetch(`${URL}/moodos/get`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch Moodos data");
+            }
+            const data = await response.json();
+            console.log(data);
+            setMoodos(data);
+        } catch (error) {
+            console.error("Error fetching Moodos data:", error);
+        }
     }
 
+    async function handleAddMoodo(task, tags) {
+        try {
+            // Make an API call to create a new Moodo
+            const response = await createMoodoAPI(task, tags); // Adjust the API function as needed
+            if (!response.ok) {
+                throw new Error("Failed to create Moodo");
+            }
+            // Refresh the Moodos data after a new Moodo is created
+            fetchMoodosData();
+        } catch (error) {
+            console.error("Error creating Moodo:", error);
+        }
+    }
 
-    const toggleMoodoAsCompleted = (id) => {
-        setMoodos((prev) => {
-            const newMoodos = prev.map((task) => {
-                if (task.id === id) {
-                    return { ...task, completed: !task.completed };
-                }
-                return task;
-            });
-            localStorage.setItem("moodos", JSON.stringify(newMoodos));
-            return newMoodos;
-        });
-    };
+    async function toggleMoodoAsCompleted(id) {
+        try {
+            // Make an API call to toggle Moodo completion
+            const response = await toggleMoodoCompletionAPI(id); // Adjust the API function as needed
+            if (!response.ok) {
+                throw new Error("Failed to toggle Moodo completion");
+            }
+            // Refresh the Moodos data after toggling completion status
+            fetchMoodosData();
+        } catch (error) {
+            console.error("Error toggling Moodo completion:", error);
+        }
+    }
 
-    function handleDeleteMoodo(id) {
-        setMoodos((prev) => {
-            const newMoodos = prev.filter((task) => task.id !== id);
-            localStorage.setItem("moodos", JSON.stringify(newMoodos));
-            return newMoodos;
-        });
+    async function handleDeleteMoodo(id) {
+        try {
+            // Make an API call to delete a Moodo
+            const response = await deleteMoodoAPI(id); // Adjust the API function as needed
+            if (!response.ok) {
+                throw new Error("Failed to delete Moodo");
+            }
+            // Refresh the Moodos data after deleting a Moodo
+            fetchMoodosData();
+        } catch (error) {
+            console.error("Error deleting Moodo:", error);
+        }
     }
 
     return (

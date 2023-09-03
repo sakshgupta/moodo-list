@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 import { useMoodos } from "@/util/store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import cow from "/public/cow.svg";
+import cow from "/public/cow.webp";
 
 export default function Home() {
     const { moodos } = useMoodos();
@@ -38,9 +38,23 @@ export default function Home() {
     return (
         <main className="flex flex-col items-center max-h-screen p-10">
             <h2 className="flex flex-row text-3xl font-bold md:mb-12 gap-x-5">
-                <Image src={cow} width="40" height="40" alt="logo" />
-                MOODO List
-                <Image src={cow} width="40" height="40" alt="logo" />
+                <Image
+                    src={cow}
+                    width="40"
+                    height="40"
+                    alt="logo"
+                    className="hidden sm:block"
+                />
+
+                <span>MOODO List</span>
+
+                <Image
+                    src={cow}
+                    width="40"
+                    height="40"
+                    alt="logo"
+                    className="hidden sm:block"
+                />
             </h2>
             <Navbar />
             <Form

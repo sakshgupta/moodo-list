@@ -18,21 +18,21 @@ function Moodos({ allMoodos }) {
     return (
         <ul className="flex flex-wrap gap-6 ml-5 p-5">
             {filteredMoodos.map((moodo) => (
-                <li key={moodo.id} className="group relative">
+                <li key={moodo._id} className="group relative">
                     <div className="w-64 p-4 bg-[#1a1c1e] rounded-lg transition-transform transform hover:bg-[#ffc37c] hover:scale-105">
                         <div className="flex items-center bg-inherit gap-x-2 mb-2">
                             {/* Checkbox */}
                             <input
                                 type="checkbox"
-                                id={`moodo-${moodo.id}`}
+                                id={`moodo-${moodo._id}`}
                                 checked={moodo.completed}
                                 onChange={() => {
-                                    toggleMoodoAsCompleted(moodo.id);
+                                    toggleMoodoAsCompleted(moodo._id);
                                 }}
                                 className="mr-2 regular-checkbox"
                             />
                             <label
-                                htmlFor={`moodo-${moodo.id}`}
+                                htmlFor={`moodo-${moodo._id}`}
                                 className="custom-checkbox"
                             ></label>
                             {/* Created At */}
@@ -65,7 +65,7 @@ function Moodos({ allMoodos }) {
 
                         <button
                             type="button"
-                            onClick={() => handleDeleteMoodo(moodo.id)}
+                            onClick={() => handleDeleteMoodo(moodo._id)}
                             className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
                         >
                             Delete
