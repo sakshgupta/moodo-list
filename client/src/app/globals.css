@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    background-color: #08090b;
+    color: white;
+}
+
+/* Style for the hidden checkbox */
+.regular-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    z-index: 1; /* Make sure the input is above the label to capture clicks */
+}
+
+/* Base style for custom checkbox */
+.custom-checkbox {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 20px;  /* Adjusted size */
+    width: 20px;   /* Adjusted size */
+    background-color: #eee; /* or your desired default background color */
+    border: 1px solid #ddd; /* or your desired border style */
+    cursor: pointer;
+    border-radius: 20%; /* Making it rounded */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Style for custom checkbox when the hidden checkbox is checked */
+.regular-checkbox:checked + .custom-checkbox {
+    background-color: #ffc37c;
+}
+
+/* Display the tick/checkmark using the Unicode character when checkbox is checked */
+.regular-checkbox:checked + .custom-checkbox::after {
+    content: "✓";
+    color: black;
+}
