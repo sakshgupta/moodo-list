@@ -9,19 +9,19 @@ const Navbar = () => {
         <nav className="sm:w-3/4 sm:mx-auto sm:mt-8">
             <ul className="flex justify-between border-b border-gray-300">
                 <NavItem href="/" active={moodosFilter === null}>
-                    All
+                    Moos
                 </NavItem>
                 <NavItem
-                    href="/?moodos=active"
-                    active={moodosFilter === "active"}
+                    href="/?moodos=mooing"
+                    active={moodosFilter === "mooing"}
                 >
-                    Active
+                    Mooing
                 </NavItem>
                 <NavItem
-                    href="/?moodos=completed"
-                    active={moodosFilter === "completed"}
+                    href="/?moodos=mooed"
+                    active={moodosFilter === "mooed"}
                 >
-                    Completed
+                    Mooed
                 </NavItem>
             </ul>
         </nav>

@@ -62,7 +62,7 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
                     value={moodo}
                     onChange={(e) => setMoodo(e.target.value)}
                     className="border border-gray-300 rounded-md p-2 max-w-96 mt-2 md:my-4 text-white"
-                    required // Make moodo input required
+                    required
                 />
                 <input
                     type="text"
@@ -70,7 +70,7 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
                     value={tags}
                     onChange={(e) => setTags(e.target.value)}
                     className="border border-gray-300 rounded-md p-2 max-w-96 my-2 md:my-4 text-white"
-                    required // Make tags input required
+                    required
                 />
                 <button
                     type="submit"

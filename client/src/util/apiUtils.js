@@ -39,3 +39,28 @@ export async function deleteMoodoAPI(id) {
 
     return response;
 }
+
+export async function editMoodoAPI(id, updatedTask, updatedTags) {
+    try {
+        const response = await fetch(`${URL}/moodos/${id}/edit`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                task: updatedTask,
+                tags: updatedTags,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to edit Moodo");
+        }
+
+        const editedMoodo = await response.json();
+        return editedMoodo;
+    } catch (error) {
+        console.error("Error editing Moodo:", error);
+        throw error;
+    }
+}

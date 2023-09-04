@@ -4,6 +4,7 @@ import {
     createMoodoAPI,
     deleteMoodoAPI,
     toggleMoodoCompletionAPI,
+    editMoodoAPI,
 } from "@/util/apiUtils";
 
 import {
@@ -81,6 +82,30 @@ export function MoodosProvider({ children }) {
         }
     }
 
+    async function editMoodo(id, updatedTask, updatedTags) {
+        try {
+            const editedMoodo = await editMoodoAPI(
+                id,
+                updatedTask,
+                updatedTags
+            );
+
+            // Update the Moodos state with the edited Moodo
+            setMoodos((prevMoodos) => {
+                return prevMoodos.map((moodo) => {
+                    if (moodo._id === id) {
+                        // Replace the old Moodo with the edited one
+                        return editedMoodo;
+                    }
+                    return moodo;
+                });
+            });
+        } catch (error) {
+            console.error("Error editing Moodo:", error);
+            // Handle error, e.g., show an error message to the user
+        }
+    }
+
     return (
         <moodosContext.Provider
             value={{
@@ -88,6 +113,7 @@ export function MoodosProvider({ children }) {
                 handleAddMoodo,
                 toggleMoodoAsCompleted,
                 handleDeleteMoodo,
+                editMoodo,
             }}
         >
             {children}

@@ -57,7 +57,7 @@ const toggleMoodoCompletion = async (req, res) => {
 const deleteMoodo = async (req, res) => {
     try {
         const { id } = req.params;
-
+        
         // Find and remove the Moodo by ID
         await Moodo.findByIdAndRemove(id);
 
@@ -68,9 +68,34 @@ const deleteMoodo = async (req, res) => {
     }
 };
 
+// route - http://localhost:5000/moodos/id/edit
+const editMoodo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { task, tags } = req.body;
+
+        const updatedMoodo = await Moodo.findByIdAndUpdate(
+            id,
+            { task, tags },
+            { new: true }
+        );
+
+        if (!updatedMoodo) {
+            return res.status(404).json({ error: "Moodo not found" });
+        }
+
+        res.status(200).json(updatedMoodo);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
 module.exports = {
     createMoodo,
     getAllMoodos,
     toggleMoodoCompletion,
     deleteMoodo,
+    editMoodo,
 };
