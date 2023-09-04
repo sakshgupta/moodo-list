@@ -13,6 +13,7 @@
   <li><strong>Completed Tasks:</strong> Archive completed tasks for future reference.</li>
   <li><strong>HTTP Methods:</strong> Utilize HTTP methods, including GET, POST, PUT, and DELETE for seamless task management.</li>
   <li><strong>Basic Validation:</strong> Implemented basic validation to ensure no empty task titles and reasonable title length.</li>
+  <li><strong>Global State Management:</strong> Utilized the useContext hook to efficiently manage global state across the application.</li>
 </ul>
 
 <h1>Technologies Used 🚀</h1>
