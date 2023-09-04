@@ -6,13 +6,15 @@ const {
     toggleMoodoCompletion,
     deleteMoodo,
     editMoodo,
+    signup,
+    signin,
 } = require("../controllers/moodoController");
 
 // Route to create a new Moodo
 router.post("/moodos/create", createMoodo);
 
 // Route to get all Moodos
-router.get("/moodos/get", getAllMoodos);
+router.get("/moodos/:email/get", getAllMoodos);
 
 // Route to toggle Moodo completion status
 router.put("/moodos/:id/toggle", toggleMoodoCompletion);
@@ -22,5 +24,11 @@ router.delete("/moodos/:id/delete", deleteMoodo);
 
 // Route to edit a Moodo 
 router.put("/moodos/:id/edit", editMoodo);
+
+// Route to signup
+router.post("/user/signup", signup);
+
+// Route to signin
+router.post("/user/signin", signin);
 
 module.exports = router;

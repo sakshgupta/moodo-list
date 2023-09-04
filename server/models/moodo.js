@@ -22,4 +22,22 @@ const moodoSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Moodo", moodoSchema);
+const userSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    moodos: [moodoSchema],
+});
+
+const User = mongoose.model("user", userSchema);
+
+module.exports = {
+    User,
+};

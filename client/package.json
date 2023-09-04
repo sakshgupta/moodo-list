@@ -2,6 +2,11 @@
   "name": "code",
   "version": "0.1.0",
   "private": true,
+  "author": "Saksham Gupta",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakshgupta/moodo-list"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "universal-cookie": "^6.1.0"
   }
 }
