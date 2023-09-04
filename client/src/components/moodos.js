@@ -93,7 +93,9 @@ function Moodos({ allMoodos }) {
                         {/* Task title */}
                         <h3
                             className={`mb-4 bg-inherit ${
-                                moodo?.completed ? "line-through text-white" : ""
+                                moodo?.completed
+                                    ? "line-through text-white"
+                                    : ""
                             } group-hover:text-black`}
                         >
                             {moodo?.task}
@@ -114,7 +116,7 @@ function Moodos({ allMoodos }) {
                         <button
                             type="button"
                             onClick={() => openEditPopup(moodo)}
-                            className="mt-4 mr-2 px-4 py-2 bg-black text-white rounded-md border-2 border-[#984bc2] hover:bg-[#1a1c1e]"
+                            className="mt-4 mr-2 px-4 py-2 bg-black text-white rounded-md border-2 border-[#984bc2] hover:bg-[#984bc2]"
                         >
                             Edit
                         </button>
@@ -122,7 +124,7 @@ function Moodos({ allMoodos }) {
                         <button
                             type="button"
                             onClick={() => handleDeleteMoodo(moodo?._id)}
-                            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            className="mt-4 px-4 py-2 border-2 border-red-500 bg-black text-white rounded-md hover:bg-red-600"
                         >
                             Delete
                         </button>

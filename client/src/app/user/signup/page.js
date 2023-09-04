@@ -53,7 +53,11 @@ function SignUp() {
                 cookies.set("email", formData.email, { path: "/" });
 
                 // ? Update before deploying
-                window.location.href = "http://localhost:3000/";
+                window.location.href =
+                    process.env.NEXT_PUBLIC_FLAG == "PRODUCTION"
+                        ? "https://moodo-sakshgupta.vercel.app/"
+                        : "http://localhost:3000/";
+                        
             } else {
                 const data = await response.json();
                 setError(data.message || "Signup failed.");

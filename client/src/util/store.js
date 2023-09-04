@@ -21,7 +21,11 @@ export const moodosContext = createContext(null);
 export function MoodosProvider({ children }) {
     const cookies = new Cookies();
 
-    const URL = "http://localhost:5001";
+    const URL =
+        process.env.NEXT_PUBLIC_FLAG == "PRODUCTION"
+            ? "https://moodo-backend.onrender.com"
+            : "http://localhost:5000";
+            
     const [moodos, setMoodos] = useState([]);
     const [auth, setAuth] = useState(null);
 
@@ -40,7 +44,7 @@ export function MoodosProvider({ children }) {
                 throw new Error("Failed to fetch Moodos data");
             }
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setMoodos(data);
         } catch (error) {
             console.error("Error fetching Moodos data:", error);
@@ -51,7 +55,7 @@ export function MoodosProvider({ children }) {
         try {
             if (email) {
                 setAuth(email);
-                console.log(auth);
+                // console.log(auth);
             } else {
                 setAuth(null);
             }

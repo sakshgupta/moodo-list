@@ -37,7 +37,10 @@ function SignIn() {
                 cookies.set("email", formData.email, { path: "/" });
 
                 // ? Update before deploying
-                window.location.href = "http://localhost:3000/";
+                window.location.href =
+                    process.env.NEXT_PUBLIC_FLAG == "PRODUCTION"
+                        ? "https://moodo-sakshgupta.vercel.app/"
+                        : "http://localhost:3000/";
             } else {
                 const data = await response.json();
                 setError(data.message || "Signin failed.");
@@ -115,7 +118,7 @@ function SignIn() {
 
                     {/* Link to Sign Up */}
                     <p className="text-sm mt-4 bg-[#1a1c1e]">
-                        Don't have an account?{" "}
+                        Don&apos;t have an account?{" "}
                         <Link href="/user/signup">
                             <span className="text-[#ffc37c] hover:underline bg-[#1a1c1e]">
                                 Sign Up

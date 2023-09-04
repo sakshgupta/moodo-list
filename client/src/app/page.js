@@ -39,9 +39,9 @@ export default function Home() {
         setFilteredMoodos(moodos);
     }, [moodos]);
 
-    console.log(moodos);
+    // console.log(moodos);
     useEffect(() => {
-        const URL = "http://localhost:5001";
+        const URL = "https://moodo-backend.onrender.com";
         fetch(`${URL}/moodos/sakshamgupta.dev@gmail.com/get`)
             .then((response) => response.json())
             .then((data) => {

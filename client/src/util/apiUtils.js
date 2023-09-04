@@ -1,7 +1,12 @@
-const URL = "http://localhost:5001";
+console.log(process.env.NEXT_PUBLIC_FLAG);
+const URL =
+    process.env.NEXT_PUBLIC_FLAG == "PRODUCTION"
+        ? "https://moodo-backend.onrender.com"
+        : "http://localhost:5000";
+
 // Make an API call to create a new Moodo
 export async function createMoodoAPI(email, task, tags) {
-    const apiUrl = `${URL}/moodos/create`; 
+    const apiUrl = `${URL}/moodos/create`;
     const requestBody = {
         task,
         tags,
@@ -21,9 +26,9 @@ export async function createMoodoAPI(email, task, tags) {
 
 // Make an API call to toggle Moodo completion status
 export async function toggleMoodoCompletionAPI(email, id) {
-    const apiUrl = `${URL}/moodos/${id}/toggle`; 
+    const apiUrl = `${URL}/moodos/${id}/toggle`;
     const requestBody = {
-        email, 
+        email,
     };
 
     const response = await fetch(apiUrl, {
@@ -41,7 +46,7 @@ export async function toggleMoodoCompletionAPI(email, id) {
 export async function deleteMoodoAPI(email, id) {
     const apiUrl = `${URL}/moodos/${id}/delete`;
     const requestBody = {
-        email, 
+        email,
     };
 
     const response = await fetch(apiUrl, {
