@@ -22,8 +22,12 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
         // Split the tags input by comma and trim each tag
         const tagArray = tags.split(",").map((tag) => tag.trim());
 
-        // Check if both moodo and tags are not empty
-        if (moodo.trim() !== "" && tagArray.length > 0) {
+        // Check if both moodo and tags are not empty and moodo is at least 5 characters long
+        if (
+            moodo.trim() !== "" &&
+            tagArray.length > 0 &&
+            moodo.trim().length >= 5
+        ) {
             // Pass the moodo and tags to handleAddMoodo
             handleAddMoodo(moodo, tagArray);
 
@@ -32,7 +36,9 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
             setTags("");
         } else {
             // Handle validation error (e.g., show an error message)
-            console.error("Both Moodo and Tags are required.");
+            console.error(
+                "Both Moodo and Tags are required, and Moodo should be at least 5 characters long."
+            );
         }
     }
 
@@ -58,7 +64,7 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
             <form className="md:space-x-2" onSubmit={handleFormSubmit}>
                 <input
                     type="text"
-                    placeholder="Write your moodo"
+                    placeholder="Write your moodo (at least 5 characters)"
                     value={moodo}
                     onChange={(e) => setMoodo(e.target.value)}
                     className="border border-gray-300 rounded-md p-2 max-w-96 mt-2 md:my-4 text-white"
@@ -74,7 +80,10 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
                 />
                 <button
                     type="submit"
-                    className="bg-[#ffc37c] text-black rounded-md px-4 py-2 mb-2 sm:m-2 font-bold cursor-pointer"
+                    className={`bg-[#ffc37c] text-black rounded-md px-4 py-2 mb-2 sm:m-2 font-bold cursor-pointer ${
+                        moodo.length < 5 ? "cursor-not-allowed opacity-50" : ""
+                    }`}
+                    disabled={moodo.length < 5}
                 >
                     ADD
                 </button>
@@ -106,3 +115,4 @@ function Form({ handleFilter, clearFilter, handleSearch }) {
 }
 
 export default Form;
+
